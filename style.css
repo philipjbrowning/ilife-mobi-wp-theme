@@ -1,0 +1,158 @@
+/*
+Theme Name: 	Starkers
+Theme URI: 		http://viewportindustries.com/products/starkers
+Description: 	The totally nude Wordpress theme!
+Version: 		4.0
+Author: 		Elliot Jay Stocks & Keir Whitaker
+Author URI: 	http://viewportindustries.com
+Tags: 			starkers, naked, clean, basic
+*/
+
+/*
+===========================
+CONTENTS:
+
+01 Sensible defaults
+02 Typography
+03 Structure
+04 Colors
+05 Media queries 
+===========================
+*/
+
+/* ---------------------------------------------------------------------------------------------------------- 
+01 Sensible defaults ----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+@import "css/reset.css";
+
+div,
+article,
+section,
+header,
+footer,
+nav,
+li					{ position:relative; /* For absolutely positioning elements within containers (add more to the list if need be) */ }
+.group:after 		{ display:block; height:0; clear:both; content:"."; visibility:hidden; /* For clearing */ }
+body 				{ background:#fff; /* Don't forget to style your body to avoid user overrides */ }
+::-moz-selection 	{ background:#ff0; color:#333; }
+::selection 		{ background:#ff0; color:#333; }
+
+/* ---------------------------------------------------------------------------------------------------------- 
+02 Typography -----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+/*
+
+14 / 16	= 		0.875em 		(14px equivalent)
+16 / 16	= 		1em 			(16px equivalent)
+18 / 16 = 		1.125em 		(18px equivalent)
+21 / 16 = 		1.3125em 		(21px equivalent)
+24 / 16 = 		1.5em 			(24px equivalent)
+30 / 16 = 		1.875em 		(30px equivalent)
+
+*/
+
+a{text-decoration:none}
+a:hover{text-decoration:underline}
+/* We strongly recommend you declare font-weight using numerical values, but check to see which weights you're exporting first */
+body, input, textarea{font-family: verdana,arial,helvetica,sans-serif;font-size:0.875em;}
+/* This helps to identify headings at the initial build stage, but you should write something more precise later on */
+h1, h2, h3, h4, h5, h6{font-weight:bold}
+h1{font:84px Georgia, "Times New Roman", Times, serif}
+h2{font-size:16px}
+
+.search_input{font:13px/24px Arial, Helvetica, sans-serif}
+.text_center{text-align:center}
+.text_height_30{line-height:30px}
+.text_right{text-align:right}
+
+#main{}
+#main_top h1{font:28px/50px Georgia, "Times New Roman", Times, serif}
+
+/* ---------------------------------------------------------------------------------------------------------- 
+03 Structure ------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+h1{margin:160px auto 30px}
+h2{display: block;margin-bottom:10px;padding:4px 7px;width:100%}
+header{margin-bottom:20px}
+
+.align_left{float:left}
+.height_30{height:30px}
+.height_50{height:50px}
+.height_60{height:60px}
+.li_item{margin-bottom:20px}
+.margin_bottom_20{margin-bottom:20px}
+.margin_bottom_60{margin-bottom:60px}
+.margin_left_160{margin-left:160px}
+.search_input{height:24px;margin:10px 0;padding:1px 15px 1px 5px}
+.ul_horizontal li{display:inline;list-style-type:none}
+.width_20{width:20%}
+.width_30{width:30%}
+.width_50{width:50%}
+.width_250px{width:250px}
+.width_full{width:100%}
+.width_third{width:33.33%}
+.width_two_thirds{width:66.67%}
+
+
+#code_results{margin:20px 20px 20px 150px;padding:0 20px;width:620px}
+#sidebar{margin-top:20px}
+#search_input{margin-bottom:15px;padding:2px 7px 2px 2px;max-width:572px;min-width:534px;width:45%}
+#search_input input{border:none;margin:2px;max-width:548px;min-width:510px;width:100%}
+#search_input_top input{width:534px}
+#wrap_body{max-width:1260px;min-width:960px;width:100%-20px}
+#main_top{height:50px;padding:10px 20px}
+#main_top h1{margin:0;width:150px}
+
+/* ---------------------------------------------------------------------------------------------------------- 
+04 Colors ---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+body{background-color:#F8F8F8;color:#222}
+h2{background-color:#EEE;border:1px solid #D9D9D9;color:#6A5A3A;}
+input:required:invalid, input:focus:invalid {
+  background-image: url(images/invalid.gif);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+input:required:valid {
+  background-image: url(images/valid.gif);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+input:focus {
+    outline:0;
+}
+
+.bg_grey{background-color:#EEE}
+.links_white a{color:#FFF}
+
+#code_results{border-right:1px solid #D9D9D9}
+#main_top{border-bottom:1px solid #D9D9D9}
+#search_input{background-color:#FFF;border-color:#C0C0C0 #D9D9D9 #D9D9D9;border-style:solid;border-width:1px;border-radius:1px;color:#777}
+#wrap_sublinks{color:#FFF}
+
+
+/* ---------------------------------------------------------------------------------------------------------- 
+05 Media queries (using a mobile-first approach) ------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+/* 400 and up */
+@media screen and (min-width:400px) {
+
+					{ /* Place your styles here for all widths greater than 400px */ }
+
+}
+
+/* Retina Display */
+@media screen and (-webkit-min-device-pixel-ratio:2) {
+
+					{ /* Place your styles here for all 'Retina' screens */ }
+
+}
+
+/* ---------------------------------------------------------------------------------------------------------- 
+06 Testing ------------------------------------- ------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+#wrap_sublinks{background-color:#1C9942}
