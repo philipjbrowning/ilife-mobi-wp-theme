@@ -151,10 +151,10 @@ if (!empty($_GET)) {
         <input type="url" id="website_URL" class="line_height_24 search_input" name="website_URL" placeholder="Enter a URL (e.g. http://www.amazon.com)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter a URL (e.g. http://www.amazon.com)'" value="<?php echo $website_URL; ?>" required />
     </div>
     <div id="search_buttons_top" class="align_left height_50">
-        <input type="submit" id="search_submit_top" name="search_submit_top" value="Parse" />
+        <input type="submit" id="search_submit_top" class="button" name="search_submit_top" value="Parse" />
     </div>
     <div id="links_top" class="align_left height_50">
-        <p><input type="button" id="button_testing" name="button_testing" value="Testing" /></p>
+        <p><input type="button" id="button_testing"class="button" name="button_testing" value="Testing" /></p>
     </div>
 	
 </div> <!-- End of #main_top -->
@@ -254,7 +254,7 @@ if (!empty($_GET)) {
     		<input type="url" id="website_URL" class="line_height_24 search_input" name="website_URL" placeholder="Enter a URL (e.g. http://www.amazon.com)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter a URL (e.g. http://www.amazon.com)'" required />
     	</div>
     	<div id="search_buttons">
-    		<input type="button" id="button_testing" name="button_testing" value="Testing" /> <input type="submit" id="search_submit" name="search_submit" value="Parse" />
+    		<input type="button" id="button_testing" class="button" name="button_testing" value="Testing" /> <input type="submit" id="search_submit" class="button" name="search_submit" value="Parse" />
     	</div>
         <input type="hidden" id="remove_comments" class="" name="remove_comments" checked="checked" />
         <input type="hidden" id="remove_header" class="" name="remove_header" checked="checked" />
