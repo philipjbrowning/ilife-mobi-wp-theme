@@ -13,31 +13,17 @@
  * @since 		Starkers 4.0
  */
 error_reporting(-1);
-
-
-function get_test_answer($new_answer)
-{
-	if(is_numeric($new_answer)) {
-		return $new_answer;
-	}
-	elseif(is_bool($new_answer))
-	{
-		return "false";
-	}
-	else // WP_Error class
-	{
-		return $new_answer->get_error_message();
-	}
-}
 ?>
+
+<?php wp_enqueue_script('ajax_search_request', '/wp-content/themes/', array('jquery')); ?>
 
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header' ) ); ?>
 
 <?php
 if (!empty($_GET)) {
 	// Save $_GET variables
-	$list_container_tag = false;
-	$list_item_tag      = false;
+	$list_container_tag_name = false;
+	$list_item_tag_name      = false;
 	$remove_comments    = false;
 	$remove_header      = false;
 	$remove_script      = false;
@@ -45,13 +31,13 @@ if (!empty($_GET)) {
 	$search_keyword     = '';
 	$website_URL        = $_GET['website_URL'];
 	
-	if (isset($_GET['list_container_tag']))
+	if (isset($_GET['list_container_tag_name']))
 	{
-		$list_container_tag = $_GET['list_container_tag'];
+		$list_container_tag_name = $_GET['list_container_tag_name'];
 	}
-	if (isset($_GET['list_item_tag']))
+	if (isset($_GET['list_item_tag_name']))
 	{
-		$list_item_tag = $_GET['list_item_tag'];
+		$list_item_tag_name = $_GET['list_item_tag_name'];
 	}
 	if (isset($_GET['remove_comments']))
 	{
@@ -132,10 +118,16 @@ if (!empty($_GET)) {
 	
 	//
 	$html->save_HTML_with_URL( $website_URL );
-	$tag_names = $html->get_all_tag_names();
-	$tag_name = "div";
-	$body_start = $html->get_tag_start_position( $tag_name );
-	$body_end = $html->get_tag_end_position( $tag_name, $body_start );
+	$list_container_tag_names = $html->get_all_tag_names();
+	$list_container_tag_attributes = false;
+	$list_container_tag_attribute_values = false;
+	if ($list_container_tag_name !== false)
+	{
+		$list_container_tag_attributes = $html->get_all_attributes_within_tag( $list_container_tag_name );
+	}
+	// $tag_name = "div";
+	// $body_start = $html->get_tag_start_position( $tag_name );
+	// $body_end = $html->get_tag_end_position( $tag_name, $body_start );
 ?>
 
 <form id="select_URL" name="select_URL" action="" method="get">
@@ -152,6 +144,9 @@ if (!empty($_GET)) {
     <div id="search_buttons_top" class="align_left height_50">
         <input type="submit" id="search_submit" name="search_submit" value="Parse" />
     </div>
+    <div id="links_top" class="align_left height_50">
+        <p><input type="button" id="button_testing" name="button_testing" value="Testing" /></p>
+    </div>
 	
 </div> <!-- End of #main_top -->
 <!-- =========================================================================================== -->
@@ -161,7 +156,7 @@ if (!empty($_GET)) {
 <div id="search_results">
 	
     <!-- ======================================================================================= -->
-	<div id="code_results" class="align_left margin_left_160">
+	<div id="code_results" class="align_left margin_left_160 results_left">
 		<pre><?php print_r( $html->get_all_HTML() ); ?></pre>
 	</div>
 	<!-- ======================================================================================= -->
@@ -171,11 +166,11 @@ if (!empty($_GET)) {
 	<div id="sidebar" class="align_left width_250px">
     	<div id="options_data" class="margin_bottom_20">
             <h2>Data Options</h2>
-            <p><input type="checkbox" id="remove_comments" class="" name="remove_comments" <?php if ($remove_comments === true) { ?>checked="checked"<?php } ?> /> Remove comments</p>
-            <p><input type="checkbox" id="remove_header" class="" name="remove_header" <?php if ($remove_header === true) { ?>checked="checked"<?php } ?> /> Remove header</p>
-            <p><input type="checkbox" id="remove_script" class="" name="remove_script" <?php if ($remove_script === true) { ?>checked="checked"<?php } ?> /> Remove script</p>
-            <p><input type="checkbox" id="remove_style" class="" name="remove_style" <?php if ($remove_style === true) { ?>checked="checked"<?php } ?> /> Remove style</p>
-            <p><input type="checkbox" id="remove_whitespace" class="" name="remove_whitespace" /> Remove extra whitespace (SOON!)</p>
+            <p><input type="checkbox" id="remove_comments" class="form_change" name="remove_comments" <?php if ($remove_comments === true) { ?>checked="checked"<?php } ?> /> Remove comments</p>
+            <p><input type="checkbox" id="remove_header" class="form_change" name="remove_header" <?php if ($remove_header === true) { ?>checked="checked"<?php } ?> /> Remove header</p>
+            <p><input type="checkbox" id="remove_script" class="form_change" name="remove_script" <?php if ($remove_script === true) { ?>checked="checked"<?php } ?> /> Remove script</p>
+            <p><input type="checkbox" id="remove_style" class="form_change" name="remove_style" <?php if ($remove_style === true) { ?>checked="checked"<?php } ?> /> Remove style</p>
+            <p><input type="checkbox" id="remove_whitespace" class="form_change" name="remove_whitespace" /> Remove extra whitespace (SOON!)</p>
         </div> <!-- End of #options_data -->
         
         <?php if ($URL_variables !== false) { ?>
@@ -192,18 +187,18 @@ if (!empty($_GET)) {
         
         <div id="options_parsing" class="margin_bottom_20">
         	<h2>Advanced Parsing</h2>
-            <p><label for="list_container_tag">List container:</label></p>
+            <p><label for="list_container_tag_name">List container:</label></p>
             <p>
-            <select id="list_container_tag" name="list_container_tag">
-            	<option value=""<?php if (!$list_container_tag) { ?> selected="selected"<?php } ?>>Tag</option>
-            	<?php foreach ($tag_names as $value) { ?>
-                <option value="<?php echo $value; ?>" <?php if ($list_container_tag === $value) { ?> selected="selected"<?php } ?>>&lt;<?php echo $value; ?>&gt;</option>
+            <select id="list_container_tag_name" class="form_change" name="list_container_tag_name">
+            	<option value=""<?php if (!$list_container_tag_name) { ?> selected="selected"<?php } ?>>Tag</option>
+            	<?php foreach ($list_container_tag_names as $value) { ?>
+                <option value="<?php echo $value; ?>" <?php if ($list_container_tag_names === $value) { ?> selected="selected"<?php } ?>>&lt;<?php echo $value; ?>&gt;</option>
             	<?php } ?>
             </select>
-            <select id="list_container_attribute" name="list_container_attribute">
+            <select id="list_container_attribute" name="list_container_attribute" disabled="disabled">
                 <option value="">Attribute</option>
             </select>
-            <select id="list_container_value" name="list_container_value">
+            <select id="list_container_value" name="list_container_value" disabled="disabled">
                 <option value="">Value</option>
             </select>
             </p>
@@ -214,11 +209,8 @@ if (!empty($_GET)) {
         
         <?php if ( is_user_logged_in() ) { // --------------------------------------------------- ?>
         
-        <!-- <div>
-            <p><input type="checkbox" id="is_search_URL" class="" name="is_search_URL" <?php if ($is_search_URL === true) { ?>checked="checked"<?php } ?> /> Is the URL from a search</p>
-            <p><input type="text" id="search_keyword" name="search_keyword"<?php if ($search_keyword != '') { ?>value="<?php echo $search_keyword; ?>"<?php } ?> placeholder="Search keyword" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search keyword'" />
-            <p><?php echo $tag_name; ?> start: <?php echo get_test_answer($body_start); ?></p>
-            <p><?php echo $tag_name; ?> end: <?php echo get_test_answer($body_end); ?></p>
+        <div>
+            <p>more</p>
         </div> <!-- End of #advanced_parsing -->
         
         <?php  } else { ?> 
@@ -235,9 +227,6 @@ if (!empty($_GET)) {
         <?php } // End of if ( is_user_logged_in() ) ?>
 	</div> <!-- End of #sidebar -->
 	<!-- ======================================================================================= -->
-	
-</div> <!-- End of #search_results -->
-<!-- =========================================================================================== -->
 
 </form>
 
@@ -256,12 +245,13 @@ if (!empty($_GET)) {
     		<input type="url" id="website_URL" class="line_height_24 search_input" name="website_URL" placeholder="Enter a URL (e.g. http://www.amazon.com)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter a URL (e.g. http://www.amazon.com)'" required />
     	</div>
     	<div id="search_buttons">
-    		<input type="button" value="Help" /> <input type="submit" id="search_submit" name="search_submit" value="Parse" />
+    		<input type="button" id="button_testing" name="button_testing" value="Testing" /> <input type="submit" id="search_submit" name="search_submit" value="Parse" />
     	</div>
         <input type="hidden" id="remove_comments" class="" name="remove_comments" checked="checked" />
         <input type="hidden" id="remove_header" class="" name="remove_header" checked="checked" />
         <input type="hidden" id="remove_script" class="" name="remove_script" checked="checked" />
         <input type="hidden" id="remove_style" class="" name="remove_style" checked="checked" />
+        <input type="hidden" id="remove_whitespace" class="" name="remove_whitespace" />
     </center>
     </form>
 	

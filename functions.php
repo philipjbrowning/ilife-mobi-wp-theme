@@ -95,3 +95,27 @@
 			</article>
 		<?php endif;
 	}
+	
+	/* ========================================================================================================================
+	
+	Additional Functions
+	
+	======================================================================================================================== */
+
+	/**
+	 * [DESCRIPTION]
+	 */
+	function get_test_answer($new_answer)
+	{
+		if(is_numeric($new_answer)) {
+			return $new_answer;
+		}
+		elseif(is_bool($new_answer))
+		{
+			return "false";
+		}
+		else // WP_Error class
+		{
+			return $new_answer->get_error_message();
+		}
+	}
