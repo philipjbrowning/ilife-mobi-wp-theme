@@ -15,12 +15,11 @@
 error_reporting(-1);
 ?>
 
-<?php wp_enqueue_script('ajax_search_request', '/wp-content/themes/', array('jquery')); ?>
-
-<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header' ) ); ?>
+<?php // wp_enqueue_script('site', '/wp-content/themes/ilife-mobi-wp-theme/js/', array('jquery')); ?>
 
 <?php
 if (!empty($_GET)) {
+	
 	// Save $_GET variables
 	$list_container_tag_name = false;
 	$list_item_tag_name      = false;
@@ -128,9 +127,14 @@ if (!empty($_GET)) {
 	// $tag_name = "div";
 	// $body_start = $html->get_tag_start_position( $tag_name );
 	// $body_end = $html->get_tag_end_position( $tag_name, $body_start );
+}
 ?>
 
-<form id="select_URL" name="select_URL" action="" method="get">
+<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header' ) ); ?>
+
+<?php if (!empty($_GET)) { ?>
+
+<form id="select_URL_top" name="select_URL_top" action="" method="get">
 
 <!-- =========================================================================================== -->
 <div id="main_top" class="bg_grey">
@@ -142,7 +146,7 @@ if (!empty($_GET)) {
         <input type="url" id="website_URL" class="line_height_24 search_input" name="website_URL" placeholder="Enter a URL (e.g. http://www.amazon.com)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter a URL (e.g. http://www.amazon.com)'" value="<?php echo $website_URL; ?>" required />
     </div>
     <div id="search_buttons_top" class="align_left height_50">
-        <input type="submit" id="search_submit" name="search_submit" value="Parse" />
+        <input type="submit" id="search_submit_top" name="search_submit_top" value="Parse" />
     </div>
     <div id="links_top" class="align_left height_50">
         <p><input type="button" id="button_testing" name="button_testing" value="Testing" /></p>
@@ -179,7 +183,7 @@ if (!empty($_GET)) {
         	<h2>URL Variables</h2>
             <?php foreach ($URL_variables as $key => $value) { ?>
             <p><label for="variable_<?php echo $key; ?>"><?php echo $key; ?>:</label></p>
-            <p><input type="text" id="variable_<?php echo $key; ?>" class="" name="variable_<?php echo $key; ?>" value="<?php echo $value; ?>" /></p>
+            <p><input type="text" id="variable_<?php echo $key; ?>" class="variables" name="variable_<?php echo $key; ?>" value="<?php echo $value; ?>" /></p>
             <?php } ?>
         </div> <!-- End of #options_url -->
         

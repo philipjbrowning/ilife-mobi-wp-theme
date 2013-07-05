@@ -1,11 +1,11 @@
 /*
-Theme Name: 	Starkers
-Theme URI: 		http://viewportindustries.com/products/starkers
-Description: 	The totally nude Wordpress theme!
-Version: 		4.0
-Author: 		Elliot Jay Stocks & Keir Whitaker
-Author URI: 	http://viewportindustries.com
-Tags: 			starkers, naked, clean, basic
+Theme Name: 	iLife Mobi
+Theme URI: 		https://github.com/philipjbrowning/ilife-mobi-wp-theme
+Description: 	The theme for iLife Mobi
+Version: 		1.0
+Author: 		Philip J. Browning
+Author URI: 	https://github.com/philipjbrowning
+Tags: 			starkers, clean, basic
 */
 
 /*
@@ -52,12 +52,10 @@ body 				{ background:#fff; /* Don't forget to style your body to avoid user ove
 
 */
 
-a{text-decoration:none}
-a:hover{text-decoration:underline}
-/* We strongly recommend you declare font-weight using numerical values, but check to see which weights you're exporting first */
-body, input, textarea{font-family: verdana,arial,helvetica,sans-serif;font-size:0.875em;}
-/* This helps to identify headings at the initial build stage, but you should write something more precise later on */
-h1, h2, h3, h4, h5, h6{font-weight:bold}
+a                       {text-decoration:none}
+a:hover                 {text-decoration:underline}
+body, input, textarea   {font-family: verdana,arial,helvetica,sans-serif;font-size:0.875em;}
+h1, h2, h3, h4, h5, h6  {font-weight:bold}
 h1{font:84px Georgia, "Times New Roman", Times, serif}
 h2{font-size:16px}
 
@@ -85,7 +83,7 @@ header{margin-bottom:20px}
 .margin_bottom_60{margin-bottom:60px}
 .margin_left_160{margin-left:160px}
 .results_left{margin:20px 20px 20px 150px;padding:0 20px;width:620px}
-.search_input{height:24px;margin:10px 0;padding:1px 15px 1px 5px}
+.search_input{height:24px;margin:10px 0;padding:1px 22px 1px 5px}
 .ul_horizontal li{display:inline;list-style-type:none}
 .width_20{width:20%}
 .width_30{width:30%}
@@ -97,7 +95,7 @@ header{margin-bottom:20px}
 
 #sidebar{margin-top:20px}
 #search_input{margin-bottom:15px;padding:2px 7px 2px 2px;max-width:572px;min-width:534px;width:45%}
-#search_input input{border:none;margin:2px;max-width:548px;min-width:510px;width:100%}
+#search_input input{border:none;margin:2px;max-width:541px;min-width:503px;width:100%}
 #search_input_top input{width:534px}
 #wrap_body{max-width:1260px;min-width:960px;width:100%-20px}
 #main_top{height:50px;padding:10px 20px}
