@@ -27,6 +27,7 @@ if (!empty($_GET)) {
 	$remove_header      = false;
 	$remove_script      = false;
 	$remove_style       = false;
+	$remove_whitespace  = false;
 	$search_keyword     = '';
 	$website_URL        = $_GET['website_URL'];
 	
@@ -53,6 +54,10 @@ if (!empty($_GET)) {
 	if (isset($_GET['remove_style']))
 	{
 		$remove_style = true;
+	}
+	if (isset($_GET['remove_whitespace']))
+	{
+		$remove_whitespace = true;
 	}
 	if (isset($_GET['search_keyword']))
 	{
@@ -113,7 +118,7 @@ if (!empty($_GET)) {
 	}
 	// Create new Parsed Object
 	$html = new WP_HTML_Parser;
-	$options_result = $html->set_options($remove_comments, $remove_header, $remove_script, $remove_style);
+	$options_result = $html->set_options($remove_comments, $remove_header, $remove_script, $remove_style, $remove_whitespace);
 	
 	//
 	$html->save_HTML_with_URL( $website_URL );
@@ -174,7 +179,7 @@ if (!empty($_GET)) {
             <p><input type="checkbox" id="remove_header" class="form_change" name="remove_header" <?php if ($remove_header === true) { ?>checked="checked"<?php } ?> /> Remove header</p>
             <p><input type="checkbox" id="remove_script" class="form_change" name="remove_script" <?php if ($remove_script === true) { ?>checked="checked"<?php } ?> /> Remove script</p>
             <p><input type="checkbox" id="remove_style" class="form_change" name="remove_style" <?php if ($remove_style === true) { ?>checked="checked"<?php } ?> /> Remove style</p>
-            <p><input type="checkbox" id="remove_whitespace" class="form_change" name="remove_whitespace" /> Remove extra whitespace (SOON!)</p>
+            <p><input type="checkbox" id="remove_whitespace" class="form_change" name="remove_whitespace" <?php if ($remove_whitespace === true) { ?>checked="checked"<?php } ?> /> Remove extra whitespace</p>
         </div> <!-- End of #options_data -->
         
         <?php if ($URL_variables !== false) { ?>
@@ -255,7 +260,7 @@ if (!empty($_GET)) {
         <input type="hidden" id="remove_header" class="" name="remove_header" checked="checked" />
         <input type="hidden" id="remove_script" class="" name="remove_script" checked="checked" />
         <input type="hidden" id="remove_style" class="" name="remove_style" checked="checked" />
-        <input type="hidden" id="remove_whitespace" class="" name="remove_whitespace" />
+        <input type="hidden" id="remove_whitespace" class="" name="remove_whitespace" checked="checked" />
     </center>
     </form>
 	

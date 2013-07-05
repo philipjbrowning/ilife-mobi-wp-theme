@@ -16,6 +16,11 @@ jQuery(document).ready(function($) {
 		window.location = "?page_id=459";
 	});
 	
+	$('#select_URL').submit(function() {
+		// alert("SENDING");
+		$('#website_URL').css('background-image','url(http://ilife.mobi/wp-content/themes/ilife-mobi-wp-theme/images/ajax-loader-16.gif)');
+	});
+	
 	$('#select_URL_top').submit(function() {
 		
 		// Set up some variables with needed values

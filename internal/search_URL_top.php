@@ -11,6 +11,7 @@ if (!empty($_GET)) {
 	$remove_header      = false;
 	$remove_script      = false;
 	$remove_style       = false;
+	$remove_whitespace  = false;
 	$search_keyword     = '';
 	$website_URL        = $_GET['website_URL'];
 	
@@ -41,6 +42,10 @@ if (!empty($_GET)) {
 	if (isset($_GET['search_keyword']))
 	{
 		$search_keyword = $_GET['search_keyword'];
+	}
+	if (isset($_GET['remove_whitespace']))
+	{
+		$remove_whitespace = true;
 	}
 	
 	// Retrieve any variables in the website URL
@@ -98,7 +103,7 @@ if (!empty($_GET)) {
 	
 	// Plugin is activated
 	$html = new WP_HTML_Parser;
-	$options_result = $html->set_options($remove_comments, $remove_header, $remove_script, $remove_style);
+	$options_result = $html->set_options($remove_comments, $remove_header, $remove_script, $remove_style, $remove_whitespace);
 	$html->save_HTML_with_URL( $website_URL );
 ?>
 <pre><?php print_r( $html->get_all_HTML() ); ?></pre>
