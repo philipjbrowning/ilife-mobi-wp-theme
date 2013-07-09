@@ -76,6 +76,8 @@ header{margin-bottom:20px}
 
 .align_left{float:left}
 .button{margin:10px 0 10px 10px;padding:8px}
+.center{margin-left:auto;margin-right:auto}
+.center_text{text-align:center}
 .height_30{height:30px}
 .height_50{height:50px}
 .height_60{height:60px}
@@ -84,7 +86,7 @@ header{margin-bottom:20px}
 .margin_bottom_60{margin-bottom:60px}
 .margin_left_160{margin-left:160px}
 .results_left{margin:20px 20px 20px 150px;padding:0 20px;width:620px}
-.search_input{height:24px;margin:10px 0;padding:1px 22px 1px 5px}
+.search_input{border:none;height:24px;margin:10px 0;margin:2px 6px 2px 2px;padding:3px 22px 3px 6px}
 .ul_horizontal li{display:inline;list-style-type:none}
 .width_20{width:20%}
 .width_30{width:30%}
@@ -95,11 +97,16 @@ header{margin-bottom:20px}
 .width_two_thirds{width:66.67%}
 
 #sidebar{margin-top:20px}
-#search_input{margin-bottom:15px;padding:2px 7px 2px 2px;max-width:572px;min-width:534px;width:45%}
-#search_input input{border:none;margin:2px;max-width:541px;min-width:503px;width:100%}
-#search_input_top input{width:534px}
+
+#search_input{margin-bottom:15px;padding:2px;width:592px}
+#search_input input{width:554px}
+
+#search_input_top{margin:7px 0;width:636px}
+#search_input_top input{height:30px;width:626px}
+
 #search_submit{margin:10px}
 #wrap_body{max-width:1260px;min-width:960px;width:100%-20px}
+#wrap_main{width:600px}
 #main_top{height:50px;padding:10px 20px}
 #main_top h1{margin:0;width:150px}
 
@@ -128,7 +135,7 @@ input:focus {
 
 #code_results{border-right:1px solid #D9D9D9}
 #main_top{border-bottom:1px solid #D9D9D9}
-#search_input{background-color:#FFF;border-color:#C0C0C0 #D9D9D9 #D9D9D9;border-style:solid;border-width:1px;border-radius:1px;color:#777}
+#search_input, #search_input_top{background-color:#FFF;border-color:#C0C0C0 #D9D9D9 #D9D9D9;border-style:solid;border-width:1px;border-radius:1px;color:#777}
 #wrap_sublinks{color:#FFF}
 
 
