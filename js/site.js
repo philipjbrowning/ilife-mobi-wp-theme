@@ -8,20 +8,20 @@
 jQuery(document).ready(function($) {
 	// Set up some variables with needed values
 	var settings = {
-		list_container_attribute_name : $('#list_container_attribute_name').val(),
-		list_container_tag_name       : $('#list_container_tag_name').val(),
-		list_container_value_name     : $('#list_container_value_name').val(),
-		list_item_attribute_name      : $('#list_item_attribute_name').val(),
-		list_item_tag_name            : $('#list_item_tag_name').val(),
-		list_item_value_name          : $('#list_item_value_name').val(),
-		remove_comments               : $('#remove_comments').attr('checked'),
-		remove_header                 : $('#remove_header').attr('checked'),
-		remove_script                 : $('#remove_script').attr('checked'),
-		remove_style                  : $('#remove_style').attr('checked'),
-		remove_whitespace             : $('#remove_whitespace').attr('checked'),
-		search_submit                 : $('#search_submit').val(),
-		url_variables                 : new Object(),
-		website_URL                   : $('#website_URL').val(),
+		list_container_attribute_name  : $('#list_container_attribute_name').val(),
+		list_container_attribute_value : $('#list_container_attribute_value').val(),
+		list_container_tag_name        : $('#list_container_tag_name').val(),
+		list_item_attribute_name       : $('#list_item_attribute_name').val(),
+		list_item_attribute_value      : $('#list_item_attribute_value').val(),
+		list_item_tag_name             : $('#list_item_tag_name').val(),
+		remove_comments                : $('#remove_comments').attr('checked'),
+		remove_header                  : $('#remove_header').attr('checked'),
+		remove_script                  : $('#remove_script').attr('checked'),
+		remove_style                   : $('#remove_style').attr('checked'),
+		remove_whitespace              : $('#remove_whitespace').attr('checked'),
+		search_submit                  : $('#search_submit').val(),
+		url_variables                  : new Object(),
+		website_URL                    : $('#website_URL').val(),
 	};
 	
 	var ajax_loader = '<img id="loader" src="http://ilife.mobi/wp-content/themes/ilife-mobi-wp-theme/images/ajax-loader.gif" alt="Loading..." />';
@@ -34,24 +34,49 @@ jQuery(document).ready(function($) {
 	
 	//
 	$('.form_change').change(function() {
-		// my_alert_text();
+		if (this.id != 'website_URL')
+		{
+			// Show the ajax loader
+			$('#code_results').html(ajax_loader);
+		}
+		
 		if (this.id.substring(0, 9) == "variable_") {
 			settings['url_variables'][this.id] = $(this).val();
+			change_url(settings);
 		} else {
+			var get_results;
 			switch (this.id)
 			{
-				case 'list_container_attribute_name': settings[this.id] = $(this).val(); break;
-				case 'list_container_tag_name':  settings[this.id] = $(this).val(); break;
-				case 'list_container_value_name':  settings[this.id] = $(this).val(); break;
-				case 'list_item_attribute_name':  settings[this.id] = $(this).val(); break;
-				case 'list_item_tag_name':  settings[this.id] = $(this).val(); break;
-				case 'list_item_value_name':  settings[this.id] = $(this).val(); break;
-				case 'remove_comments': settings[this.id] = $(this).attr('checked'); break;
-				case 'remove_header': settings[this.id] = $(this).attr('checked'); break;
-				case 'remove_script': settings[this.id] = $(this).attr('checked'); break;
-				case 'remove_style': settings[this.id] = $(this).attr('checked'); break;
-				case 'remove_whitespace': settings[this.id] = $(this).attr('checked'); break;
-				case 'search_submit': settings[this.id] = $(this).val(); break;
+				case 'list_container_attribute_name':
+					settings[this.id] = $(this).val();
+					get_attribute_name_list(settings, get_attribute_name_list_results);
+					break;
+				case 'list_container_attribute_value':
+					settings[this.id] = $(this).val();
+					get_attribute_value_list(settings, get_attribute_value_list_results);
+					break;
+				case 'list_container_tag_name':
+					settings[this.id] = $(this).val();
+					get_tag_name_list(settings, get_tag_name_list_results);
+					break;
+				case 'list_item_attribute_name':
+					settings[this.id] = $(this).val();
+					get_attribute_name_list(settings, get_attribute_name_list_results);
+					break;
+				case 'list_item_value_name':
+					settings[this.id] = $(this).val();
+					get_attribute_value_list(settings, get_attribute_value_list_results);
+					break;
+				case 'list_item_tag_name':
+					settings[this.id] = $(this).val();
+					get_tag_name_list(settings, get_tag_name_list_results);
+					break;
+				case 'remove_comments': settings[this.id] = $(this).attr('checked'); change_options(settings, change_options_results); break;
+				case 'remove_header': settings[this.id] = $(this).attr('checked'); change_options(settings, change_options_results); break;
+				case 'remove_script': settings[this.id] = $(this).attr('checked'); change_options(settings, change_options_results); break;
+				case 'remove_style': settings[this.id] = $(this).attr('checked'); change_options(settings, change_options_results); break;
+				case 'remove_whitespace': settings[this.id] = $(this).attr('checked'); change_options(settings, change_options_results); break;
+				case 'search_submit': settings[this.id] = $(this).val(); change_url(settings, change_url_results); break;
 				case 'website_URL': settings[this.id] = $(this).val(); break;
 				default: return; break;
 			}
@@ -62,10 +87,6 @@ jQuery(document).ready(function($) {
 			console.log(this.id + " = " + settings['url_variables'][this.id]);
 		} else {
 			console.log(this.id + " = " + settings[this.id]);
-		}
-		
-		if (this.id != 'website_URL') {
-			// $('#select_URL_top').submit();
 		}
 	});
 	
@@ -81,12 +102,12 @@ jQuery(document).ready(function($) {
 	$('#select_URL_top').submit(function() {
 		
 		// Set up some variables with needed values
-		var list_container_attribute_name  = $('#list_container_attribute_name').val();
-			list_container_tag_name        = $('#list_container_tag_name').val();
-			list_container_value_name      = $('#list_container_value_name').val();
-			list_item_attribute_name       = $('#list_item_attribute_name').val();
-			list_item_tag_name             = $('#list_item_tag_name').val();
-			list_item_value_name           = $('#list_item_value_name').val();
+		var list_container_attribute_name  = $('#list_container_attribute_name').val(),
+			list_container_attribute_value = $('#list_container_attribute_value').val(),
+			list_container_tag_name        = $('#list_container_tag_name').val(),
+			list_item_attribute_name       = $('#list_item_attribute_name').val(),
+			list_item_attribute_value      = $('#list_item_attribute_value').val(),
+			list_item_tag_name             = $('#list_item_tag_name').val(),
 		    remove_comments                = $('#remove_comments').attr('checked'),
 			remove_header                  = $('#remove_header').attr('checked'),
 			remove_script                  = $('#remove_script').attr('checked'),
@@ -103,20 +124,20 @@ jQuery(document).ready(function($) {
 		$('#code_results').html(ajax_loader);
 		
 		$.get('wp-content/themes/ilife-mobi-wp-theme/internal/search_URL_top.php', {
-			website_URL: website_URL,
-			search_submit: search_submit,
+			list_container_attribute_name: list_container_attribute_name,
+			list_container_attribute_value: list_container_attribute_value,
+			list_container_tag_name: list_container_tag_name,
+			list_item_attribute_name: list_item_attribute_name,
+			list_item_attribute_value: list_item_attribute_value,
+			list_item_tag_name: list_item_tag_name,
 			remove_comments: remove_comments,
 			remove_header: remove_header,
 			remove_script: remove_script,
 			remove_style: remove_style,
 			remove_whitespace: remove_whitespace,
+			search_submit: search_submit,
 			url_variables: url_variables,
-			list_container_attribute_name: list_container_attribute_name,
-			list_container_tag_name: list_container_tag_name,
-			list_container_value_name: list_container_value_name,
-			list_item_attribute_name: list_item_attribute_name,
-			list_item_tag_name: list_item_tag_name,
-			list_item_value_name: list_item_value_name
+			website_URL: website_URL
 		}, function(data) {
 			// Hide the ajax loader
 			$('#loader').hide();
@@ -131,3 +152,39 @@ jQuery(document).ready(function($) {
 		return false; // So that the form will not be submitted through HTML.
 	});
 });
+
+function change_options_results(data)
+{
+	console.log('#4 [change_options_results] data = ' + data);
+	jQuery(document).ready(function($) {
+		$('#code_results').html(data);
+	});
+}
+
+function change_url_results(data)
+{
+	console.log('#4 [change_url_results] data = ' + data);
+	// Hide Ajax Loader
+	$('#loader').hide();
+}
+
+function get_attribute_name_list_results(data)
+{
+	console.log('#4 [get_attribute_name_list_results] data = ' + data);
+	// Hide Ajax Loader
+	$('#loader').hide();
+}
+
+function get_attribute_value_list_results(data)
+{
+	console.log('#4 [get_attribute_value_list_results] data = ' + data);
+	// Hide Ajax Loader
+	$('#loader').hide();
+}
+
+function get_tag_name_list_results(data)
+{
+	console.log('#4 [get_tag_name_list_results] data = ' + data);
+	// Hide Ajax Loader
+	$('#loader').hide();
+}

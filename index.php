@@ -19,19 +19,39 @@ error_reporting(-1);
 if (!empty($_GET)) {
 	
 	// Save $_GET variables
-	$list_container_tag_name = false;
-	$list_item_tag_name      = false;
-	$remove_comments    = false;
-	$remove_header      = false;
-	$remove_script      = false;
-	$remove_style       = false;
-	$remove_whitespace  = false;
-	$search_keyword     = '';
-	$website_URL        = $_GET['website_URL'];
+	$list_container_attribute_name  = false;
+	$list_container_attribute_value = false;
+	$list_container_tag_name        = false;
+	$list_item_attribute_name       = false;
+	$list_item_attribute_value      = false;
+	$list_item_tag_name             = false;
+	$remove_comments                = false;
+	$remove_header                  = false;
+	$remove_script                  = false;
+	$remove_style                   = false;
+	$remove_whitespace              = false;
+	$search_keyword                 = '';
+	$website_URL                    = $_GET['website_URL'];
 	
+	if (isset($_GET['list_container_attribute_name']))
+	{
+		$list_container_attribute_name = $_GET['list_container_attribute_name'];
+	}
+	if (isset($_GET['list_container_attribute_value']))
+	{
+		$list_container_attribute_value = $_GET['list_container_attribute_value'];
+	}
 	if (isset($_GET['list_container_tag_name']))
 	{
 		$list_container_tag_name = $_GET['list_container_tag_name'];
+	}
+	if (isset($_GET['list_item_attribute_name']))
+	{
+		$list_item_attribute_name = $_GET['list_item_attribute_name'];
+	}
+	if (isset($_GET['list_item_attribute_value']))
+	{
+		$list_item_attribute_value = $_GET['list_item_attribute_value'];
 	}
 	if (isset($_GET['list_item_tag_name']))
 	{
@@ -184,22 +204,22 @@ if (!empty($_GET)) { // ========================================================
                     <option value="<?php echo $value; ?>" <?php if ($list_container_tag_names === $value) { ?> selected="selected"<?php } ?>>&lt;<?php echo $value; ?>&gt;</option>
                     <?php } ?>
                 </select>
-                <select id="list_container_attribute" class="form_change" name="list_container_attribute" disabled="disabled">
+                <select id="list_container_attribute_name" class="form_change" name="list_container_attribute_name" disabled="disabled">
                     <option value="">Attribute</option>
                 </select>
-                <select id="list_container_value" class="form_change" name="list_container_value" disabled="disabled">
+                <select id="list_container_attribute_value" class="form_change" name="list_container_attribute_value" disabled="disabled">
                     <option value="">Value</option>
                 </select>
                 </p>
                 <p><label for="list_item_tag_name">List Item:</label></p>
                 <p>
-                <select id="list_item_tag_name" class="form_change" name="list_item_tag_name">
+                <select id="list_item_tag_name" class="form_change" name="list_item_tag_name" disabled="disabled">
                 	<option value="">Tag</option>
                 </select>
-                <select id="list_item_tag_attribute" class="form_change" name="list_item_tag_attribute">
+                <select id="list_item_tag_attribute" class="form_change" name="list_item_tag_attribute" disabled="disabled">
                 	<option value="">Attribute</option>
                 </select>
-                <select id="list_item_tag_value" class="form_change" name="list_item_tag_value">
+                <select id="list_item_tag_value" class="form_change" name="list_item_tag_value" disabled="disabled">
                 	<option value="">Value</option>
                 </select>
                 </p>

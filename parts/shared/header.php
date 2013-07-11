@@ -10,7 +10,7 @@
                 <h1><a href="<?php echo home_url(); ?>"><?php bloginfo( 'name' ); ?></a></h1>
             </div>
             <div id="search_input_top" class="align_left">
-                <input type="url" id="website_URL" class="form_change search_input" name="website_URL" placeholder="Enter a URL (e.g. http://www.amazon.com)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter a URL (e.g. http://www.amazon.com)'" value="<?php echo $GLOBALS['website_URL']; ?>" required />
+                <input type="url" id="website_URL" class="form_change search_input" name="website_URL" placeholder="Enter a URL (e.g. http://www.amazon.com)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter a URL (e.g. http://www.amazon.com)'" value="<?php if(isset($GLOBALS['website_URL'])) { echo $GLOBALS['website_URL']; } ?>" required />
             </div>
             <div id="search_buttons_top" class="align_left height_50">
                 <input type="submit" id="search_submit_top" class="button" name="search_submit_top" value="Parse" />
