@@ -9,15 +9,15 @@
  * @since 		Starkers 4.0
  */
 ?>
-
-<?php if ( !is_user_logged_in() ) { ?>
-    
-    <h1>iLife Mobi</h1>
-    <p>This website is under construction. Please come back at a later time.</p>
-    
-<?php } else { ?>
-
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
+
+	<div id="wrap_inner">
+		<div id="container" class="align_left width_full">
+        	<div id="content">
+            	
+				<?php get_sidebar(); ?>
+				
+				<section id="main" class="margin_left_200px">
 
 <?php if ( have_posts() ): ?>
 <h2>Tag Archive: <?php echo single_tag_title( '', false ); ?></h2>
@@ -35,7 +35,12 @@
 <?php else: ?>
 <h2>No posts to display in <?php echo single_tag_title( '', false ); ?></h2>
 <?php endif; ?>
+                </section> <!-- /#main -->
+				
+			</div>
+		</div> <!-- /#container -->
+		<?php get_sidebar('right'); ?>
+		<div class="clearing width_full">&nbsp;</div>
+	</div> <!-- /#wrap_inner -->
 
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>
-
-<?php } // End of is_user_logged_in() ?>

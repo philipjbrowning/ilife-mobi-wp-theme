@@ -16,7 +16,7 @@ CONTENTS:
 02 Typography
 03 Structure
 04 Colors
-05 Media queries 
+06 Media queries 
 ===========================
 */
 
@@ -25,6 +25,8 @@ CONTENTS:
 ---------------------------------------------------------------------------------------------------------- */
 
 @import "css/reset.css";
+@import "css/ui.notify.css";
+@import "js/uniform/themes/default/css/uniform.default.min.css";
 
 div,
 article,
@@ -52,93 +54,123 @@ body 				{ background:#fff; /* Don't forget to style your body to avoid user ove
 
 */
 
-a                       {text-decoration:none}
-a:hover                 {text-decoration:underline}
-body, input, textarea   {font-family: verdana,arial,helvetica,sans-serif;font-size:0.875em;}
-h1, h2, h3, h4, h5, h6  {font-weight:bold}
-h1{font:84px Georgia, "Times New Roman", Times, serif}
-h2{font-size:16px}
+a{text-decoration:none}
+a:hover{text-decoration:underline}
+body,
+input,
+textarea 			{ font:0.9375em Georgia, "Times New Roman", Times, serif }
 
-.search_input{font:13px/24px Arial, Helvetica, sans-serif}
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 					{ font-weight:bold; /* This helps to identify headings at the initial build stage, but you should write something more precise later on */ }
+
+h2{font:bold 1.125em Verdana, Geneva, sans-serif}
+h3{font:bold 1em Verdana, Geneva, sans-serif}
+input .not_uniform{font-family:Georgia, 'Times New Roman', Times, serif}
+
+.form-table th{text-align:right}
 .text_center{text-align:center}
-.text_height_30{line-height:30px}
+.text_left{text-align:left}
 .text_right{text-align:right}
+.font_uppercase_arial{font:12px Verdana, Arial, Helvetica, sans-serif;text-transform:uppercase}
 
-#main{}
-#main_top h1{font:28px/50px Georgia, "Times New Roman", Times, serif}
+#pages{font:bold italic 10px Verdana, Arial, Helvetica, sans-serif;text-transform:uppercase}
+#pages li.current_page_item a{font-weight:normal}
+#items_tracked{font:14px/28px Verdana, Geneva, sans-serif}
 
 /* ---------------------------------------------------------------------------------------------------------- 
 03 Structure ------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
-h1{margin:160px auto 30px}
-h2{display: block;margin-bottom:10px;padding:4px 7px;width:100%}
-header{margin-bottom:20px}
+
+body{min-width:960px;max-width:1260px;padding:10px;width:100%-20px}
+h2{margin-bottom:20px;padding:4px 7px}
+html{min-width:980px;max-width:1280px;width:100%}
+input .not_uniform{margin-top:3px;padding:5px;/*border-radius:4px;-moz-border-radius:4px*/}
+ul#links li{margin-left:20px}
 
 .align_left{float:left}
-.button{margin:10px 0 10px 10px;padding:8px}
-.center{margin-left:auto;margin-right:auto}
-.center_text{text-align:center}
-.height_30{height:30px}
-.height_50{height:50px}
-.height_60{height:60px}
-.li_item{margin-bottom:20px}
-.margin_bottom_20{margin-bottom:20px}
-.margin_bottom_60{margin-bottom:60px}
-.margin_left_160{margin-left:160px}
-.margin_left_20{margin-left:20px}
-.results_left{margin:20px 20px 20px 150px;padding:0 20px;width:620px}
-.search_input{border:none;height:24px;margin:10px 0;margin:2px 6px 2px 2px;padding:3px 22px 3px 6px}
-.ul_horizontal li{display:inline;list-style-type:none}
-.width_20{width:20%}
-.width_30{width:30%}
-.width_50{width:50%}
-.width_250px{width:250px}
+.align_right{float:right}
+.amazon_image{min-height:100px}
+.amazon_image #thumbnail{height:100px;width:100px}
+.bottom{bottom:0;position:absolute}
+.clearing{height:0;clear:both}
+.form-table td{width:60%}
+.form-table th{width:40%}
+.form-table input, .form-table textarea{width:70%}
+.form-table input, .form-table label, .form-table textarea{margin-bottom:10px}
+.form-table label{margin-right:10px}
+.height_60px{height:60px}
+.hidden{display:none}
+.individual_item_info li{display:inline}
+.margin_bottom_5px{margin-bottom:5px}
+.margin_bottom_20px{margin-bottom:20px}
+.margin_left_20px{margin-left:20px}
+.margin_left_200px{margin-left:210px} /* Added 10px */
+.margin_right_20px{margin-right:20px}
+.margin_top_bottom_3px{margin:3px 0}
+.main_content{margin-right:520px}
+.min_height_100px{min-height:100px;}
+.position_relative{position:relative}
+.top_corners_curved{border-top-left-radius:4px;border-top-right-radius:4px;-moz-border-radius-top-left:4px;-moz-border-radius-top-right:4px}
+.width_8p{width:8%}
+.width_12p{width:12.5%}
+.width_20p{width:20%}
+.width_40p{width:40%}
+.width_80p{width:80%}
+.width_90p{width:90%}
+.width_96p{width:96%}
+.width_180px{width:190px} /* Added 10px */
+.width_300px{width:300px}
 .width_full{width:100%}
-.width_third{width:33.33%}
-.width_two_thirds{width:66.67%}
+.width_half{width:50%}
+.width_third{width:33.333%}
+.width_sixth{width:16.666%}
+.width_thirtieth{width:30%}
+.width_fortieth{width:40%}
+.width_twentieth{width:20%}
 
-#sidebar{margin-top:20px}
-
-#search_input{margin-bottom:15px;padding:2px;width:592px}
-#search_input input{width:554px}
-
-#search_input_top{margin:7px 0;width:636px}
-#search_input_top input{height:30px;width:626px}
-
-#search_submit{margin:10px}
-#wrap_body{max-width:1260px;min-width:960px;width:100%-20px}
-#wrap_main{width:600px}
-#main_top{height:50px;padding:10px 20px}
-#main_top h1{margin:0;width:150px}
+#container{margin-right:-300px}
+#content{margin-right:320px}
+#items_tracked li{display:inline-block;margin:0 10px}
+#main li.individual_item{margin-bottom:19px;padding-bottom:20px}
+#pages li{display:inline-block;border-top-left-radius:4px;border-top-right-radius:4px;-moz-border-radius-top-left:4px;-moz-border-radius-top-right:4px;padding:4px 3px}
+#s{width:133px} /* Added 10px */
+#searchsubmit{width:35px}
+#search_box p{padding:2px 10px}
+#search_input{padding:4px;width:180px} /* Added 10px */
+#sidebar h2{width:173px} /* Added 10px */
+#sidebar input.width_180px{width:183px} /* Added 10px */
+#sidebar_right h2{width:283px}
+#sidebar_right input[type="text"]{width:293px}
+#thumbnail{}
 
 /* ---------------------------------------------------------------------------------------------------------- 
 04 Colors ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
+h2{background-color:#E5EAEF;color:#6A5A3A;border:1px solid #E7E3DB}
+h3 a{color:#039}
+h3 a:hover{color:#05F}
+h4{color:#039}
+ins{background: none repeat scroll 0 0 #FFF} /* Override reset.css */
+time{font-style:italic}
 
-body{background-color:#F8F8F8;color:#222}
-h2{background-color:#EEE;border:1px solid #D9D9D9;color:#6A5A3A;}
-input:required:invalid, input:focus:invalid {
-  background-image: url(images/invalid.gif);
-  background-position: right center;
-  background-repeat: no-repeat;
-}
-input:required:valid {
-  background-image: url(images/valid.gif);
-  background-position: right center;
-  background-repeat: no-repeat;
-}
-input:focus {
-    outline:0;
-}
+.bg_beige{background-color:#EEC}
+.bg_green{background-color:#2AA954}
+.border_brown{border:1px solid #CC9}
+.bg_green_glow{background: #0F0}
+.border_grey{border:1px solid #676767;border-bottom:0}
+.text_white{color:#FFF}
 
-.bg_grey{background-color:#EEE}
-.links_white a{color:#FFF}
-
-#code_results{border-right:1px solid #D9D9D9}
-#main_top{border-bottom:1px solid #D9D9D9}
-#search_input, #search_input_top{background-color:#FFF;border-color:#C0C0C0 #D9D9D9 #D9D9D9;border-style:solid;border-width:1px;border-radius:1px;color:#777}
-#wrap_sublinks{color:#FFF}
-
+#items_tracked a{color:#FFF}
+#main li.individual_item{border-bottom:1px solid #E7E3DB}
+#pages li{border:1px solid #676767;border-bottom:0}
+#pages li.page_item{background-color:#EEC}
+#pages li.page_item a{color:#000}
+#pages li.current_page_item{background-color:#2AA954}
+#pages li.current_page_item a{color:#FC6}
 
 /* ---------------------------------------------------------------------------------------------------------- 
 05 Media queries (using a mobile-first approach) ------------------------------------------------------------
@@ -158,8 +190,8 @@ input:focus {
 
 }
 
-/* ---------------------------------------------------------------------------------------------------------- 
-06 Testing ------------------------------------- ------------------------------------------------------------
----------------------------------------------------------------------------------------------------------- */
-
-#wrap_sublinks{background-color:#1C9942}
+.test_bg_red{background-color:#F77}
+.test_bg_blue{background-color:#77F}
+.test_bg_green{background-color:#7F7}
+.test_bg_yellow{background-color:#FF7}
+.test_bg_grey{background-color:#777}

@@ -9,19 +9,22 @@
  * @since 		Starkers 4.0
  */
 ?>
-
-
-<?php if ( !is_user_logged_in() ) { ?>
-    
-    <h1>iLife Mobi</h1>
-    <p>Page not found.</p>
-    
-<?php } else { ?>
-
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header' ) ); ?>
 
-<h2>Page not found</h2>
+	<div id="wrap_inner">
+		<div id="container" class="align_left width_full">
+        	<div id="content">
+            	
+				<?php get_sidebar(); ?>
+				
+				<section id="main" class="margin_left_200px">
+					<h2>Page not found</h2>
+                </section> <!-- /#main -->
+				
+			</div>
+		</div> <!-- /#container -->
+		<?php get_sidebar('right'); ?>
+		<div class="clearing width_full">&nbsp;</div>
+	</div> <!-- /#wrap_inner -->
 
-<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer' ) ); ?>
-
-<?php } // End of is_user_logged_in() ?>
+<?php Starkers_Utilities::get_template_parts( array( 'parts/shared/footer','parts/shared/html-footer') ); ?>
